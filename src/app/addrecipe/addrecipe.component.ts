@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-addrecipe',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddrecipeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapis:ApiService) { }
   name=""
   dishtype=""
   ingredients=""
@@ -20,6 +21,11 @@ export class AddrecipeComponent implements OnInit {
     }
     console.log(data)
     alert("Successfully added")
+    this.myapis.addRecipe(data).subscribe(
+      (response)=>{
+        console.log(response)
+      }
+    )
     this.name=""
     this.dishtype=""
     this.ingredients=""

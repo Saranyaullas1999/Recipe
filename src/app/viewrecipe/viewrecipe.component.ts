@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-viewrecipe',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewrecipeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private myapi:ApiService) { 
+    this.fetchData()
+  }
 
-  recipeData=[{"id":1,"name":"Briyani","dishtype":"Main dish","ingredients":"Basumati rice,Chicken,Ghee and Briyani masala"},{"id":2,"name":"Lime juice","dishtype":"Drink","ingredients":"Water,Sugar,Lemon and Ice cubes"},{"id":3,"name":"Oreo Milkshake","dishtype":"Dessert","ingredients":"Oreo Cookies,Milk,Vanila icecream,chocolate sauce and sugar"},{"id":4,"name":"Fruit Salad","dishtype":"Salad","ingredients":"Strawberries,Raspberries,grapes,apples,banana and yogurt"},{"id":5,"name":"Apple Juice","dishtype":"Drink","ingredients":"Apples,Water,Sugar and Icecubes"}]
+  fetchData=()=>{
+    this.myapi.viewRecipe().subscribe(
+      (data)=>{
+        this.recipeData=data
+      }
+    )
+  }
+
+  recipeData:any=[]
 
   ngOnInit(): void {
   }
